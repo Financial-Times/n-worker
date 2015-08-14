@@ -6,9 +6,11 @@ require('isomorphic-fetch');
 
 var flags = require('next-feature-flags-client');
 var metrics = require('next-metrics');
-var normalizeName = require('./src/normalize-name');
-var serviceMetrics = require('./src/service-metrics');
+var serviceMetrics = require('./lib/service-metrics');
 var cron = require('cron');
+
+// Simply needed to patch global errors
+require('express-errors-handler');
 
 module.exports.setup = function (options) {
 	options = options || {};
@@ -54,14 +56,20 @@ module.exports.setup = function (options) {
 };
 
 
+module.exports.started = function () {
+	metrics.count('start');
+};
+
 var _cronStart = cron.CronJob.prototype.start;
 cron.CronJob.prototype.start = function () {
-	Metrics.count('cron.start');
+	metrics.count('cron.start');
+	_cronStart.call(this);
 };
 
 var _cronStop = cron.CronJob.prototype.stop;
 cron.CronJob.prototype.stop = function () {
-	Metrics.count('cron.stop');
+	metrics.count('cron.stop');
+	_cronStop.call(this);
 };
 
 module.exports.CronJob = function (opts) {
@@ -70,16 +78,16 @@ module.exports.CronJob = function (opts) {
 
 	return new cron.CronJob({
 		cronTime: opts.cronTime,
-		start: opts.start ==== false ? true : false;,
-		timeZone: opts.timezone || 'Europe/London',
+		start: opts.start === false ? false : true,
+		timeZone: opts.timeZone || 'Europe/London',
 		context: opts.context || undefined,
 		onTick: function() {
-			Metrics.count('cron.tick');
+			metrics.count('cron.tick');
 			_onTick();
 		},
 		onComplete: function() {
-			Metrics.count('cron.success');
-			_onComplete()
+			_onComplete();
+			metrics.count('cron.success');
 		}
 	});
 };

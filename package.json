@@ -1,6 +1,6 @@
 {
   "name": "@financial-times/n-worker",
-  "version": "0.0.1-beta.1",
+  "version": "1.0.0",
   "description": "Setup of basic next enhancements for non-web dynos e.g. cron-jobs, pollers",
   "main": "index.js",
   "scripts": {
@@ -32,6 +32,7 @@
   "devDependencies": {
     "chai": "^3.2.0",
     "mocha": "^2.2.5",
-    "next-build-tools": "^3.20.6"
+    "next-build-tools": "^3.20.6",
+    "sinon": "^1.15.4"
   }
 }
