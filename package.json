@@ -1,0 +1,37 @@
+{
+  "name": "@financial-times/n-worker",
+  "version": "1.0.0",
+  "description": "Setup of basic next enhancements for non-web dynos e.g. cron-jobs, pollers",
+  "main": "index.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Financial-Times/n-worker.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Financial-Times/n-worker/issues"
+  },
+  "homepage": "https://github.com/Financial-Times/n-worker#readme",
+  "dependencies": {
+    "array.prototype.find": "^1.0.0",
+    "cron": "^1.0.9",
+    "debounce": "^1.0.0",
+    "es6-promise": "^3.0.2",
+    "express-errors-handler": "^1.2.5",
+    "forever": "^0.15.1",
+    "ft-next-handlebars": "^1.3.0",
+    "ft-next-logger": "^1.1.2",
+    "isomorphic-fetch": "^2.1.1",
+    "next-feature-flags-client": "^7.1.10",
+    "next-metrics": "^1.10.10"
+  },
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "mocha": "^2.2.5",
+    "next-build-tools": "^3.20.6"
+  }
+}
