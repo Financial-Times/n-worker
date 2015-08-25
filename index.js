@@ -74,7 +74,7 @@ cron.CronJob.prototype.stop = function () {
 
 module.exports.CronJob = function (opts) {
 	var _onTick = opts.onTick;
-	var _onComplete = opts.onComplete;
+	var _onComplete = opts.onComplete || function () {};
 
 	return new cron.CronJob({
 		cronTime: opts.cronTime,
