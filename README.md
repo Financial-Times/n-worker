@@ -14,8 +14,14 @@ Sets up node enhamcemets
   - `name` optional - will get the app name from package.json if absent
   - `directory` defaults to `process.cwd()` directory in which to look for config code
 
-### n-worker#start()
-Logs to graphite when the worker has successfully started. Must be calle in your application code
+Returns a Promise.
+
+Usage:
+`javascript
+worker.setup(options).then(function(){
+	//Application init code
+})
+`
 
 ### n-worker#CronJob(options)
 Constructor for a new cron job, with metrics etc. added. `options` expects the same as [npm cron](https://www.npmjs.com/package/cron).CronJob

@@ -52,12 +52,9 @@ module.exports.setup = function (options) {
 		flagsPromise = flags.init({ url: 'http://ft-next-feature-flags-prod.s3-website-eu-west-1.amazonaws.com/flags/__flags.json' });
 	}
 
-	return flagsPromise;
-};
-
-
-module.exports.started = function () {
 	metrics.count('start');
+
+	return flagsPromise;
 };
 
 var _cronStart = cron.CronJob.prototype.start;
@@ -83,10 +80,10 @@ module.exports.CronJob = function (opts) {
 		context: opts.context || undefined,
 		onTick: function() {
 			metrics.count('cron.tick');
-			_onTick().call(this);
+			_onTick.call(this);
 		},
 		onComplete: function() {
-			_onComplete().call(this);
+			_onComplete.call(this);
 			metrics.count('cron.success');
 		}
 	});

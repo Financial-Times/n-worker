@@ -81,9 +81,8 @@ describe('n-worker', function () {
 
 		it('should provide a util to count application starts', function () {
 			sinon.stub(metrics, 'count');
-			getJob();
 			expect(metrics.count.calledWith('start')).to.be.false;
-			worker.started();
+			getJob();
 			expect(metrics.count.calledWith('start')).to.be.true;
 			metrics.count.restore();
 		});

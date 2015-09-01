@@ -1,6 +1,6 @@
 {
   "name": "@financial-times/n-worker",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "Setup of basic next enhancements for non-web dynos e.g. cron-jobs, pollers",
   "main": "index.js",
   "scripts": {
