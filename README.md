@@ -14,6 +14,15 @@ Sets up node enhamcemets
   - `name` optional - will get the app name from package.json if absent
   - `directory` defaults to `process.cwd()` directory in which to look for config code
 
+Returns a Promise.
+
+Usage:
+`javascript
+worker.setup(options).then(function(){
+	//Application init code
+})
+`
+
 ### n-worker#start()
 Logs to graphite when the worker has successfully started. Must be calle in your application code
 

@@ -56,7 +56,7 @@ module.exports.setup = function (options) {
 };
 
 
-module.exports.started = function () {
+module.exports.start = function () {
 	metrics.count('start');
 };
 
