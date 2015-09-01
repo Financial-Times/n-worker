@@ -52,12 +52,9 @@ module.exports.setup = function (options) {
 		flagsPromise = flags.init({ url: 'http://ft-next-feature-flags-prod.s3-website-eu-west-1.amazonaws.com/flags/__flags.json' });
 	}
 
-	return flagsPromise;
-};
-
-
-module.exports.start = function () {
 	metrics.count('start');
+
+	return flagsPromise;
 };
 
 var _cronStart = cron.CronJob.prototype.start;

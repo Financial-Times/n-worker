@@ -23,9 +23,6 @@ worker.setup(options).then(function(){
 })
 `
 
-### n-worker#start()
-Logs to graphite when the worker has successfully started. Must be calle in your application code
-
 ### n-worker#CronJob(options)
 Constructor for a new cron job, with metrics etc. added. `options` expects the same as [npm cron](https://www.npmjs.com/package/cron).CronJob
 
