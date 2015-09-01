@@ -80,10 +80,10 @@ module.exports.CronJob = function (opts) {
 		context: opts.context || undefined,
 		onTick: function() {
 			metrics.count('cron.tick');
-			_onTick().call(this);
+			_onTick.call(this);
 		},
 		onComplete: function() {
-			_onComplete().call(this);
+			_onComplete.call(this);
 			metrics.count('cron.success');
 		}
 	});
