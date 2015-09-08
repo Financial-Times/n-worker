@@ -6,6 +6,7 @@ require('isomorphic-fetch');
 
 var flags = require('next-feature-flags-client');
 var metrics = require('next-metrics');
+var normalizeName = require('./lib/normalize-name');
 var serviceMetrics = require('./lib/service-metrics');
 var cron = require('cron');
 
@@ -42,6 +43,7 @@ module.exports.setup = function (options) {
 	}
 
 	if (!name) throw new Error("Please specify an application name");
+	name = normalizeName(name);
 
 	metrics.init({ app: name, flushEvery: 40000 });
 	serviceMetrics.init();
