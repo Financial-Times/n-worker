@@ -6,7 +6,7 @@ require('isomorphic-fetch');
 
 var flags = require('next-feature-flags-client');
 var metrics = require('next-metrics');
-var normalizeName = require('./lib/normalize-name')
+var normalizeName = require('./lib/normalize-name');
 var serviceMetrics = require('./lib/service-metrics');
 var cron = require('cron');
 
