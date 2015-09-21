@@ -23,7 +23,6 @@
     "es6-promise": "^3.0.2",
     "express-errors-handler": "^1.2.5",
     "forever": "^0.15.1",
-    "ft-next-handlebars": "^1.3.0",
     "ft-next-logger": "^1.1.2",
     "isomorphic-fetch": "^2.1.1",
     "next-feature-flags-client": "^7.1.10",
