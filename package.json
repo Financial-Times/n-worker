@@ -26,7 +26,7 @@
     "ft-next-logger": "^1.1.2",
     "isomorphic-fetch": "^2.1.1",
     "next-feature-flags-client": "^7.1.10",
-    "next-metrics": "^1.10.10"
+    "next-metrics": "^1.16.3"
   },
   "devDependencies": {
     "chai": "^3.2.0",
