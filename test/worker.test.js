@@ -6,7 +6,7 @@ var worker = require('../index');
 var metrics = require('next-metrics');
 var sinon = require('sinon');
 var flags = require('next-feature-flags-client');
-var errorsHandler = require('express-errors-handler');
+var raven = require('@financial-times/n-raven');
 var cron = require('cron');
 
 describe('n-worker', function () {
@@ -20,11 +20,8 @@ describe('n-worker', function () {
 
 	describe('setup', function () {
 		it('by default don\'t set up flags', function (done) {
-			var resolveFlags;
 			sinon.stub(flags, 'init', function () {
-				return new Promise(function (resolve, reject) {
-					resolveFlags = resolve;
-				});
+				return new Promise(function () {});
 			});
 			var appCode = sinon.spy();
 			var worker1 = worker.setup();
@@ -41,7 +38,7 @@ describe('n-worker', function () {
 		it('allow waiting for flags to be setup', function (done) {
 			var resolveFlags;
 			sinon.stub(flags, 'init', function () {
-				return new Promise(function (resolve, reject) {
+				return new Promise(function (resolve) {
 					resolveFlags = resolve;
 				});
 			});
@@ -90,7 +87,7 @@ describe('n-worker', function () {
 		it('should instrument fetch for recognised services', function (done) {
 			var realFetch = GLOBAL.fetch;
 
-			sinon.stub(errorsHandler, 'captureMessage');
+			sinon.stub(raven, 'captureMessage');
 			getJob();
 
 			expect(GLOBAL.fetch).to.not.equal(realFetch);
@@ -104,8 +101,8 @@ describe('n-worker', function () {
 				}).catch(function () {})
 			])
 				.then(function () {
-					expect(errorsHandler.captureMessage.called).to.be.false;
-					errorsHandler.captureMessage.restore();
+					expect(raven.captureMessage.called).to.be.false;
+					raven.captureMessage.restore();
 					done();
 				});
 
@@ -113,7 +110,7 @@ describe('n-worker', function () {
 
 		it('should notify sentry of unrecognised services', function (done) {
 
-			sinon.stub(errorsHandler, 'captureMessage');
+			sinon.stub(raven, 'captureMessage');
 			getJob();
 
 			fetch('http://notallowed.com', {
@@ -121,8 +118,8 @@ describe('n-worker', function () {
 			})
 				.catch(function () {})
 				.then(function () {
-					expect(errorsHandler.captureMessage.called).to.be.true;
-					errorsHandler.captureMessage.restore();
+					expect(raven.captureMessage.called).to.be.true;
+					raven.captureMessage.restore();
 					done();
 				});
 		});
