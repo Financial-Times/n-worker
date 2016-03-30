@@ -29,14 +29,12 @@ module.exports.setup = function (options) {
 	});
 
 	var name = options.name;
-	var description = "";
 	var directory = options.directory || process.cwd();
 
 	if (!name) {
 		try {
 			packageJson = require(directory + '/package.json');
 			name = packageJson.name;
-			description = packageJson.description || "";
 		} catch(e) {
 			// Safely ignorable error
 		}
