@@ -31,5 +31,3 @@ Reference to the instance of metrics used by the job
 
 ### n-worker#flags
 Reference to the instance of flags used by the job
-
-
