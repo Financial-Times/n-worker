@@ -4,11 +4,11 @@ require('array.prototype.find');
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
-var flags = require('next-feature-flags-client');
-var metrics = require('next-metrics');
-var normalizeName = require('./lib/normalize-name');
-var serviceMetrics = require('./lib/service-metrics');
-var cron = require('cron');
+const flags = require('next-feature-flags-client');
+const metrics = require('next-metrics');
+const normalizeName = require('./lib/normalize-name');
+const serviceMetrics = require('./lib/service-metrics');
+const cron = require('cron');
 
 // Simply needed to patch global errors
 require('express-errors-handler');
@@ -16,11 +16,11 @@ require('express-errors-handler');
 module.exports.setup = function (options) {
 	options = options || {};
 
-	var packageJson = {};
-
-	var defaults = {
+	const defaults = {
 		withFlags: false
 	};
+
+	let packageJson = {};
 
 	Object.keys(defaults).forEach(function (prop) {
 		if (typeof options[prop] === 'undefined') {
@@ -28,8 +28,8 @@ module.exports.setup = function (options) {
 		}
 	});
 
-	var name = options.name;
-	var directory = options.directory || process.cwd();
+	const directory = options.directory || process.cwd();
+	let name = options.name;
 
 	if (!name) {
 		try {
@@ -40,13 +40,13 @@ module.exports.setup = function (options) {
 		}
 	}
 
-	if (!name) throw new Error("Please specify an application name");
+	if (!name) throw new Error('Please specify an application name');
 	name = normalizeName(name);
 
 	metrics.init({ app: name, flushEvery: 40000 });
 	serviceMetrics.init();
 
-	var flagsPromise = Promise.resolve();
+	let flagsPromise = Promise.resolve();
 
 	if (options.withFlags) {
 		flagsPromise = flags.init({ url: 'http://ft-next-feature-flags-prod.s3-website-eu-west-1.amazonaws.com/flags/__flags.json' });
@@ -57,32 +57,32 @@ module.exports.setup = function (options) {
 	return flagsPromise;
 };
 
-var _cronStart = cron.CronJob.prototype.start;
+const _cronStart = cron.CronJob.prototype.start;
 cron.CronJob.prototype.start = function () {
 	metrics.count('cron.start');
 	_cronStart.call(this);
 };
 
-var _cronStop = cron.CronJob.prototype.stop;
+const _cronStop = cron.CronJob.prototype.stop;
 cron.CronJob.prototype.stop = function () {
 	metrics.count('cron.stop');
 	_cronStop.call(this);
 };
 
 module.exports.CronJob = function (opts) {
-	var _onTick = opts.onTick;
-	var _onComplete = opts.onComplete || function () {};
+	const _onTick = opts.onTick;
+	const _onComplete = opts.onComplete || function () {};
 
 	return new cron.CronJob({
 		cronTime: opts.cronTime,
 		start: opts.start === false ? false : true,
 		timeZone: opts.timeZone || 'Europe/London',
 		context: opts.context || undefined,
-		onTick: function() {
+		onTick: function () {
 			metrics.count('cron.tick');
 			_onTick.call(this);
 		},
-		onComplete: function() {
+		onComplete: function () {
 			_onComplete.call(this);
 			metrics.count('cron.success');
 		}
