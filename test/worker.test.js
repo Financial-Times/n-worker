@@ -150,13 +150,13 @@ describe('n-worker', function () {
 			new worker.CronJob({
 				cronTime: '0 0 0 0 0 0',
 				start: false,
-				timeZone: 'Addis Ababa',
+				timeZone: 'Europe/London',
 				context: testContext,
 				onTick: function () {},
 				onComplete: function () {}
 			});
 			expect(cron.CronJob.lastCall.args[0].start).to.be.false;
-			expect(cron.CronJob.lastCall.args[0].timeZone).to.equal('Addis Ababa');
+			expect(cron.CronJob.lastCall.args[0].timeZone).to.equal('Europe/London');
 			expect(cron.CronJob.lastCall.args[0].context).to.equal(testContext);
 			cron.CronJob.restore();
 		});
