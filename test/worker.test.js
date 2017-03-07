@@ -1,13 +1,13 @@
 /* global it, describe, beforeEach */
 'use strict';
 
-var expect = require('chai').expect;
-var worker = require('../index');
-var metrics = require('next-metrics');
-var sinon = require('sinon');
-var flags = require('next-feature-flags-client');
-var raven = require('@financial-times/n-raven');
-var cron = require('cron');
+const expect = require('chai').expect;
+const worker = require('../index');
+const metrics = require('next-metrics');
+const sinon = require('sinon');
+const flags = require('next-feature-flags-client');
+const raven = require('@financial-times/n-raven');
+const cron = require('cron');
 
 describe('n-worker', function () {
 
@@ -23,8 +23,8 @@ describe('n-worker', function () {
 			sinon.stub(flags, 'init', function () {
 				return new Promise(function () {});
 			});
-			var appCode = sinon.spy();
-			var worker1 = worker.setup();
+			const appCode = sinon.spy();
+			const worker1 = worker.setup();
 			expect(flags.init.called).to.be.false;
 
 			worker1.then(appCode);
@@ -36,14 +36,14 @@ describe('n-worker', function () {
 		});
 
 		it('allow waiting for flags to be setup', function (done) {
-			var resolveFlags;
+			let resolveFlags;
 			sinon.stub(flags, 'init', function () {
 				return new Promise(function (resolve) {
 					resolveFlags = resolve;
 				});
 			});
-			var appCode = sinon.spy();
-			var worker1 = worker.setup({withFlags: true});
+			const appCode = sinon.spy();
+			const worker1 = worker.setup({withFlags: true});
 			expect(flags.init.called).to.be.true;
 
 			worker1.then(appCode);
@@ -85,7 +85,7 @@ describe('n-worker', function () {
 		});
 
 		it('should instrument fetch for recognised services', function (done) {
-			var realFetch = GLOBAL.fetch;
+			const realFetch = GLOBAL.fetch;
 
 			sinon.stub(raven, 'captureMessage');
 			getJob();
@@ -131,7 +131,7 @@ describe('n-worker', function () {
 		it('should set up some defaults', function () {
 
 			sinon.spy(cron, 'CronJob');
-			var cronnieBarker = new worker.CronJob({
+			const cronnieBarker = new worker.CronJob({
 				cronTime: '0 0 0 0 0 0',
 				onTick: function () {},
 				onComplete: function () {}
@@ -146,7 +146,7 @@ describe('n-worker', function () {
 		it('defaults should be overridable', function () {
 
 			sinon.spy(cron, 'CronJob');
-			var testContext = {};
+			const testContext = {};
 			new worker.CronJob({
 				cronTime: '0 0 0 0 0 0',
 				start: false,
@@ -164,16 +164,16 @@ describe('n-worker', function () {
 		it('should add metrics to internal methods', function () {
 			sinon.spy(cron, 'CronJob');
 			sinon.stub(metrics, 'count');
-			var onTickSpy = sinon.spy();
-			var onCompleteSpy = sinon.spy();
+			const onTickSpy = sinon.spy();
+			const onCompleteSpy = sinon.spy();
 			new worker.CronJob({
 				cronTime: '0 0 0 0 0 0',
 				onTick: onTickSpy,
 				onComplete: onCompleteSpy
 			});
 
-			var wrappedOnTick = cron.CronJob.lastCall.args[0].onTick;
-			var wrappedOnComplete = cron.CronJob.lastCall.args[0].onComplete;
+			const wrappedOnTick = cron.CronJob.lastCall.args[0].onTick;
+			const wrappedOnComplete = cron.CronJob.lastCall.args[0].onComplete;
 
 			wrappedOnTick();
 			expect(onTickSpy.called).to.be.true;
@@ -188,7 +188,7 @@ describe('n-worker', function () {
 
 		it('should add metrics to public methods', function () {
 			sinon.stub(metrics, 'count');
-			var cron = new worker.CronJob({
+			const cron = new worker.CronJob({
 				cronTime: '0 0 0 0 0 0',
 				onTick: function () {},
 				onComplete: function () {}
