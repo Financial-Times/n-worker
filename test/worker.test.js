@@ -1,6 +1,4 @@
 /* global it, describe, beforeEach */
-'use strict';
-
 const expect = require('chai').expect;
 const worker = require('../index');
 const metrics = require('next-metrics');
