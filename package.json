@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "make test",
-    "commit": "commit-wizard"
+    "precommit": "make verify && node_modules/.bin/secret-squirrel",
+    "prepush": "make unit-test"
   },
   "repository": {
     "type": "git",
@@ -31,18 +32,11 @@
     "next-metrics": "^1.16.3"
   },
   "devDependencies": {
-    "@financial-times/n-gage": "^1.1.8",
+    "@financial-times/n-gage": "^1.8.9",
     "chai": "^3.2.0",
     "eslint": "^2.11.1",
     "lintspaces-cli": "^0.1.1",
     "mocha": "^2.2.5",
     "sinon": "^1.15.4"
-  },
-  "config": {
-    "pre-git": {
-      "pre-commit": [
-        "node_modules/.bin/secret-squirrel"
-      ]
-    }
   }
 }
