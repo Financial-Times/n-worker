@@ -2,7 +2,7 @@ require('array.prototype.find');
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
-const flags = require('next-feature-flags-client');
+const flags = require('@financial-times/n-flags-client');
 const metrics = require('next-metrics');
 const normalizeName = require('./lib/normalize-name');
 const serviceMetrics = require('./lib/service-metrics');

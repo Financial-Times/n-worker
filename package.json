@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Financial-Times/n-worker#readme",
   "dependencies": {
+    "@financial-times/n-flags-client": "^9.0.0",
     "@financial-times/n-raven": "^2.0.0",
     "array.prototype.find": "^1.0.0",
     "cron": "^1.0.9",
@@ -28,7 +29,6 @@
     "forever": "^0.15.1",
     "ft-next-logger": "^1.1.2",
     "isomorphic-fetch": "^2.1.1",
-    "next-feature-flags-client": "^7.1.10",
     "next-metrics": "^1.16.3"
   },
   "devDependencies": {
