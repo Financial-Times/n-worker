@@ -3,7 +3,7 @@ const expect = require('chai').expect;
 const worker = require('../index');
 const metrics = require('next-metrics');
 const sinon = require('sinon');
-const flags = require('next-feature-flags-client');
+const flags = require('@financial-times/n-flags-client');
 const raven = require('@financial-times/n-raven');
 const cron = require('cron');
 
