@@ -1,5 +1,3 @@
-require('array.prototype.find');
-require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
 const flags = require('@financial-times/n-flags-client');
@@ -8,12 +6,8 @@ const normalizeName = require('./lib/normalize-name');
 const serviceMetrics = require('./lib/service-metrics');
 const cron = require('cron');
 
-// Simply needed to patch global errors
-require('express-errors-handler');
-
 module.exports.setup = function (options) {
 	options = options || {};
-
 	const defaults = {
 		withFlags: false
 	};
