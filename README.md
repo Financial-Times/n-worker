@@ -5,7 +5,7 @@ Setup of basic next enhancements for non-web dynos e.g. cron-jobs, pollers
 
 ### n-worker#setup(options)
 Sets up node enhamcemets
- - Promise, fetch and array.find
+ - `fetch` as a global using [isomorphic-fetch](https://github.com/matthew-andrews/isomorphic-fetch)
  - metrics for processes and fetch
  - flags (optional)
 
