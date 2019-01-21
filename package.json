@@ -20,7 +20,7 @@
   "homepage": "https://github.com/Financial-Times/n-worker#readme",
   "dependencies": {
     "@financial-times/n-flags-client": "^9.0.0",
-    "@financial-times/n-raven": "^2.0.0",
+    "@financial-times/n-raven": "^3.0.0",
     "cron": "^1.0.9",
     "debounce": "^1.0.0",
     "isomorphic-fetch": "^2.1.1",
