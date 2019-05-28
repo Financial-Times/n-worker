@@ -7,7 +7,8 @@
     "test": "make test",
     "precommit": "make verify && node_modules/.bin/secret-squirrel",
     "prepush": "make unit-test && make verify -j3",
-    "commitmsg": "node_modules/.bin/secret-squirrel-commitmsg"
+    "commitmsg": "node_modules/.bin/secret-squirrel-commitmsg",
+    "prepare": "npx snyk protect || npx snyk protect -d || true"
   },
   "repository": {
     "type": "git",
@@ -32,6 +33,7 @@
     "eslint": "^2.11.1",
     "lintspaces-cli": "^0.1.1",
     "mocha": "^2.2.5",
-    "sinon": "^1.15.4"
+    "sinon": "^1.15.4",
+    "snyk": "^1.168.0"
   }
 }
